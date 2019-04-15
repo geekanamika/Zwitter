@@ -22,5 +22,8 @@
     <string name="label_dot">•</string>
     <string name="label_sample_time">30m</string>
     <string name="label_sample_reply">50</string>
+    <string name="label_send">SEND</string>
+    <string name="hint_type_a_message">Type a message</string>
+    <string name="label_placeholder_chat_message">How are you doing? This is a long message that should probably wrap.</string>
 
 </resources>
