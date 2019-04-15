@@ -15,4 +15,12 @@
     </string>
     <string name="sign_up_using_google">Sign Up Using Google</string>
     <string name="login">Login using Google</string>
+    <string name="item_profile">Profile</string>
+    <string name="tab_search">Search Results</string>
+    <string name="tab_notif">Notifications</string>
+    <string name="tab_msg">Messages</string>
+    <string name="label_dot">•</string>
+    <string name="label_sample_time">30m</string>
+    <string name="label_sample_reply">50</string>
+
 </resources>
