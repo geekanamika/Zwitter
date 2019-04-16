@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context=".ui.EditProfile">
+    tools:context=".ui.edit_profile.EditProfileActivity">
 
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -23,7 +23,7 @@
         tools:src="@tools:sample/avatars" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user_name"
+        android:id="@+id/til_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profImg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_enter_name" />
@@ -41,7 +42,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user_email"
+        android:id="@+id/til_user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -50,9 +51,10 @@
         android:hint="@string/hint_user_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name">
+        app:layout_constraintTop_toBottomOf="@+id/til_user_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -62,7 +64,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user_bio"
+        android:id="@+id/til_user_bio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -71,10 +73,10 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_email">
+        app:layout_constraintTop_toBottomOf="@id/til_user_email">
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:id="@+id/et_user_bio"
             android:layout_width="match_parent"
             android:inputType="textLongMessage"
             android:layout_height="wrap_content"

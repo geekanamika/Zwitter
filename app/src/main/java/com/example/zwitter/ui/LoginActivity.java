@@ -28,7 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import static com.example.zwitter.utils.Constants.MY_TAG;
 import static com.example.zwitter.utils.Constants.RC_SIGN_IN;
 
-public class LoginScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleApiClient mGoogleApiClient;
@@ -91,10 +91,10 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
                         if (!task.isSuccessful()) {
                             Log.w(MY_TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(LoginScreen.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
                     }

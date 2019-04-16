@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.EditProfile"></activity>
+        <activity android:name=".ui.view_profile.ViewProfileActivity"></activity>
+        <activity android:name=".ui.edit_profile.EditProfileActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginScreen" />
+        <activity android:name=".ui.LoginActivity" />
     </application>
 
 </manifest>

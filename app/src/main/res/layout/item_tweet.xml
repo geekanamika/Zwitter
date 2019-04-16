@@ -5,8 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:showIn="@layout/content_main"
-    android:background="@color/colorPrimary">
+    tools:showIn="@layout/content_main">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profImg"

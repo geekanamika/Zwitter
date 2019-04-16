@@ -25,7 +25,8 @@
                 android:padding="2dp">
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/togglePic"
+                    android:id="@+id/view_profile"
+                    android:scaleType="centerCrop"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
@@ -106,6 +107,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin_vertical"
-        app:srcCompat="@drawable/ic_tweet" />
+        app:srcCompat="@drawable/ic_action_zweet" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
