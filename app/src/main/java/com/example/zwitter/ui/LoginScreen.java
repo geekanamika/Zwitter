@@ -54,9 +54,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-    
-
-
     }
 
     public void logIn() {
@@ -73,7 +70,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
-                // Google Sign-In was successful, authenticate with Firebase
+                // Google Sign-In was successful, authenticate with Fire-base
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
@@ -92,9 +89,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(MY_TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(MY_TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginScreen.this, "Authentication failed.",

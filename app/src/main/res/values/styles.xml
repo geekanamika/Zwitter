@@ -71,11 +71,20 @@
             <item name="android:textColor">@color/primary_dark</item>
         </style>
 
-        <style name="FollowButton" parent="Base.Widget.AppCompat.Button">
+        <style name="positive_button" parent="Base.Widget.AppCompat.Button">
             <item name="android:layout_width">@dimen/follow_button_width</item>
-            <item name="android:background">@drawable/bg_my_message</item>
+            <item name="android:background">@drawable/bg_positive_button</item>
             <item name="android:layout_height">@dimen/follow_button_height</item>
             <item name="android:textSize">@dimen/txt_12sp</item>
+            <item name="android:textColor">#FFF</item>
         </style>
+
+    <style name="negative_button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">@dimen/follow_button_width</item>
+        <item name="android:background">@drawable/bg_negative_button</item>
+        <item name="android:layout_height">@dimen/follow_button_height</item>
+        <item name="android:textSize">@dimen/txt_12sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 
 </resources>

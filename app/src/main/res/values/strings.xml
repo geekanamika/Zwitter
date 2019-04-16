@@ -25,5 +25,10 @@
     <string name="label_send">SEND</string>
     <string name="hint_type_a_message">Type a message</string>
     <string name="label_placeholder_chat_message">How are you doing? This is a long message that should probably wrap.</string>
+    <string name="hint_enter_bio">Enter bio</string>
+    <string name="hint_enter_name">Enter Name</string>
+    <string name="hint_user_email">User Email</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_save">Save</string>
 
 </resources>

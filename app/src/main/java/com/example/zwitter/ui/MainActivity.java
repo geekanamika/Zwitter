@@ -2,39 +2,32 @@ package com.example.zwitter.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.zwitter.data.AppDataManger;
 import com.example.zwitter.R;
-import com.example.zwitter.ui.LoginScreen;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
+import com.example.zwitter.utils.Constants;
+import com.example.zwitter.utils.InjectorUtils;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Firebase instance variables
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
-    private String mUsername;
-    private String mPhotoUrl;
+    private AppDataManger dataManger;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
+        dataManger = InjectorUtils.provideRepository(this);
+
+        if (!dataManger.isSignedIn()) {
             // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, LoginScreen.class));
             finish();
             return;
         } else {
-            mUsername = mFirebaseUser.getDisplayName();
-            if (mFirebaseUser.getPhotoUrl() != null) {
-                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-            }
+            Log.d(Constants.MY_TAG, dataManger.getProfileName() + dataManger.getProfileDp());
         }
     }
 }
