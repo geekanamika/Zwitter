@@ -1,4 +1,4 @@
-package com.example.zwitter.ui.profile.edit_profile.view_profile;
+package com.example.zwitter.ui.profile.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.zwitter.R;
 import com.example.zwitter.data.AppDataManger;
-import com.example.zwitter.ui.profile.edit_profile.EditProfileActivity;
+import com.example.zwitter.ui.profile.edit.EditProfileActivity;
 import com.example.zwitter.utils.Constants;
 import com.example.zwitter.utils.InjectorUtils;
 
@@ -26,7 +26,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        dataManger = InjectorUtils.provideRepository(this);
+        dataManger = InjectorUtils.provideRepository();
         viewProfileViewModel = ViewModelProviders.of(this).get(ViewProfileViewModel.class);
         btnEditFollowProfile  = findViewById(R.id.followOrEditButton);
         btnEditFollowProfile.setOnClickListener(this);

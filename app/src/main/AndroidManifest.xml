@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.profile.edit_profile.view_profile.ViewProfileActivity"></activity>
-        <activity android:name=".ui.profile.edit_profile.EditProfileActivity" />
+        <activity android:name=".ui.main.post.PostActivity"></activity>
+        <activity android:name=".ui.profile.view.ViewProfileActivity" />
+        <activity android:name=".ui.profile.edit.EditProfileActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

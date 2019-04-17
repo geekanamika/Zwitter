@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.zwitter.R;
 import com.example.zwitter.data.AppDataManger;
 import com.example.zwitter.ui.login.LoginActivity;
-import com.example.zwitter.ui.profile.edit_profile.view_profile.ViewProfileActivity;
+import com.example.zwitter.ui.main.post.PostActivity;
+import com.example.zwitter.ui.profile.view.ViewProfileActivity;
 import com.example.zwitter.utils.Constants;
 import com.example.zwitter.utils.InjectorUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -16,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,18 +27,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private AppDataManger dataManger;
     private TabLayout mainTabLayout;
     private ViewPager mainViewPager;
+    private FloatingActionButton zweetFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dataManger = InjectorUtils.provideRepository(this);
+        dataManger = InjectorUtils.provideRepository();
         if (!dataManger.isSignedIn()) {
             // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, LoginActivity.class));
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
         mainTabLayout = findViewById(R.id.main_tabs);
         mainViewPager = findViewById(R.id.main_view_pager);
+        zweetFab = findViewById(R.id.fab_zweet);
+        zweetFab.setOnClickListener(this);
     }
 
     @Override
@@ -80,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.view_profile : startViewProfile();
                 return true;
@@ -121,6 +124,19 @@ public class MainActivity extends AppCompatActivity {
     private void startViewProfile() {
         Intent intent = new Intent(this, ViewProfileActivity.class);
         intent.putExtra(Constants.INTENT_TAG, dataManger.getUserEmail());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())  {
+            case R.id.fab_zweet : startPostActivity();
+        }
+    }
+
+    private void startPostActivity() {
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }
