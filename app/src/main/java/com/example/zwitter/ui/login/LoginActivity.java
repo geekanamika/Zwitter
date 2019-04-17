@@ -1,4 +1,4 @@
-package com.example.zwitter.ui;
+package com.example.zwitter.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.zwitter.R;
+import com.example.zwitter.data.models.User;
 import com.example.zwitter.ui.main.MainActivity;
+import com.example.zwitter.utils.Constants;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -21,19 +23,25 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import static com.example.zwitter.utils.Constants.MY_TAG;
 import static com.example.zwitter.utils.Constants.RC_SIGN_IN;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener {
 
-    private FirebaseAuth mFirebaseAuth;
+
     private GoogleApiClient mGoogleApiClient;
-    private Button signInButton;
+    private FirebaseAuth mFirebaseAuth;
+    private LoginViewModel loginViewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
 
@@ -41,10 +49,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signInButton = findViewById(R.id.btn_login);
+        Button signInButton = findViewById(R.id.btn_login);
 
         signInButton.setOnClickListener(this);
 
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         mFirebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -81,9 +90,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(MY_TAG, "firebaseAuthWithGooogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+
+
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -95,12 +106,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+                            saveUserDetailsAndStartActivity();
                         }
                     }
                 });
     }
+
+    private void saveUserDetailsAndStartActivity() {
+
+        if (!loginViewModel.logInSaveDatabase()) {
+            Toast.makeText(this, getString(R.string.error_message),Toast.LENGTH_SHORT).show();
+            return;
+        }
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
+    }
+
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

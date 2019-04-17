@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context=".ui.edit_profile.EditProfileActivity">
+    tools:context=".ui.profile.edit.EditProfileActivity">
 
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -87,6 +87,7 @@
     <Button
         android:id="@+id/action_save_profile"
         style="@style/positive_button"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

@@ -38,5 +38,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_logout">LogOut</string>
+    <string name="error_message">Something went wrong!</string>
+    <string name="hint_zweet">What\'s happening?</string>
+    <string name="label_zweet">Zweet</string>
+    <string name="toast_posting">Posting...</string>
 
 </resources>

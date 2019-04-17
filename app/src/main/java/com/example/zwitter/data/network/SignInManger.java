@@ -14,8 +14,9 @@ public class SignInManger {
     private static final Object LOCK = new Object();
     private static SignInManger sInstance;
 
-    public SignInManger() {
+    private SignInManger() {
         mFirebaseAuth = FirebaseAuth.getInstance();
+
     }
 
     public synchronized static SignInManger getInstance() {
@@ -29,9 +30,7 @@ public class SignInManger {
 
     public boolean isSignedIn() {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
-            return  false;
-        } else return  true;
+        return mFirebaseUser != null;
 
     }
 

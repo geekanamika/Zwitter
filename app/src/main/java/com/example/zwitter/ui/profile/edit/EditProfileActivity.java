@@ -1,4 +1,4 @@
-package com.example.zwitter.ui.edit_profile;
+package com.example.zwitter.ui.profile.edit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
