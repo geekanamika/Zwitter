@@ -9,6 +9,7 @@ public class SignInManger {
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+
     // For Singleton instantiation
     private static final Object LOCK = new Object();
     private static SignInManger sInstance;

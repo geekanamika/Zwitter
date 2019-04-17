@@ -5,4 +5,9 @@
      android:enabled="true"
      android:title="@string/label_view_profile"
      app:showAsAction="never"/>
+ <item
+     android:id="@+id/action_log_out"
+     android:title="@string/label_logout"
+     android:visible="true"
+     app:showAsAction="never" />
 </menu>
