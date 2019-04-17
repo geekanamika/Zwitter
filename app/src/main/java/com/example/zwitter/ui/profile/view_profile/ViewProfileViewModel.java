@@ -1,4 +1,4 @@
-package com.example.zwitter.ui.view_profile;
+package com.example.zwitter.ui.profile.edit_profile.view_profile;
 
 import android.app.Application;
 

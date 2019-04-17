@@ -7,8 +7,8 @@ import android.view.MenuItem;
 
 import com.example.zwitter.R;
 import com.example.zwitter.data.AppDataManger;
-import com.example.zwitter.ui.LoginActivity;
-import com.example.zwitter.ui.view_profile.ViewProfileActivity;
+import com.example.zwitter.ui.login.LoginActivity;
+import com.example.zwitter.ui.profile.edit_profile.view_profile.ViewProfileActivity;
 import com.example.zwitter.utils.Constants;
 import com.example.zwitter.utils.InjectorUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -16,15 +16,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppDataManger dataManger;
+    private TabLayout mainTabLayout;
+    private ViewPager mainViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,33 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        // instantiate variables
+        init();
+
+        // setUp Tabs and Viewpager
+        setUpViewPager();
+    }
+
+    private void setUpViewPager() {
+        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+
+        mainTabLayout.setupWithViewPager(mainViewPager);
+        mainViewPager.setAdapter(mainViewPagerAdapter);
+
+        int[] tabIcons = {
+                R.drawable.ic_action_home_disable,
+                R.drawable.ic_action_message_disable
+        };
+        mainTabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        mainTabLayout.getTabAt(1).setIcon(tabIcons[1]);
+    }
+
+    private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mainTabLayout = findViewById(R.id.main_tabs);
+        mainViewPager = findViewById(R.id.main_view_pager);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.zwitter.ui;
+package com.example.zwitter.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;

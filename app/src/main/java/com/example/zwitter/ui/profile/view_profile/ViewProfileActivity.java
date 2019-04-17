@@ -1,4 +1,4 @@
-package com.example.zwitter.ui.view_profile;
+package com.example.zwitter.ui.profile.edit_profile.view_profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.zwitter.R;
 import com.example.zwitter.data.AppDataManger;
-import com.example.zwitter.ui.edit_profile.EditProfileActivity;
+import com.example.zwitter.ui.profile.edit_profile.EditProfileActivity;
 import com.example.zwitter.utils.Constants;
 import com.example.zwitter.utils.InjectorUtils;
 
