@@ -46,5 +46,6 @@
     <string name="count_posts"> %1$s \n posts</string>
     <string name="count_followers"> %1$s \n followers</string>
     <string name="count_followings"> %1$s \n followings</string>
+    <string name="label_following">Following</string>
 
 </resources>

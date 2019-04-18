@@ -140,12 +140,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
      * starts home screen
      */
     private void saveUserDetailsAndStartActivity(boolean isNewUser) {
-
+        Log.d(Constants.MY_TAG, "is new " + isNewUser);
         if (isNewUser) {
-            if (!loginViewModel.logInSaveDatabase()) {
-                Toast.makeText(this, getString(R.string.error_message),Toast.LENGTH_SHORT).show();
-                return;
-            }
+            loginViewModel.logInSaveDatabase();
         }
 
         startActivity(new Intent(LoginActivity.this, MainActivity.class));

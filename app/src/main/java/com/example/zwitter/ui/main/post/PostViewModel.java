@@ -41,7 +41,6 @@ class PostViewModel extends ViewModel {
         // get unique key of new reply message by push() to reference
         String replyPostId = database.child("posts").push().getKey();
 
-        Log.d(Constants.MY_TAG, replyPostId + "\n"+replyTo +"\n"+message);
         Post post = new Post(dataManger.getUserId(), replyPostId, getProfilePicture(), message, System.currentTimeMillis(),
                 getUserName(), false);
 

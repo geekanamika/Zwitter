@@ -19,7 +19,6 @@ class FeedViewModel extends ViewModel {
     private final AppDataManger dataManger;
 
     public FeedViewModel() {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         dataManger = InjectorUtils.provideRepository();
     }
 

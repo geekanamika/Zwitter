@@ -166,7 +166,6 @@ public class FeedFragment extends Fragment {
 
     @Override
     public void onStart() {
-        Log.d(Constants.MY_TAG, "trying to listening");
         super.onStart();
         if (feedAdapter != null) {
             Log.d(Constants.MY_TAG, "listening");
@@ -176,7 +175,6 @@ public class FeedFragment extends Fragment {
 
     @Override
     public void onStop() {
-        Log.d(Constants.MY_TAG, "try to stop listening");
         super.onStop();
         if (feedAdapter != null) {
             Log.d(Constants.MY_TAG, "stop listening");

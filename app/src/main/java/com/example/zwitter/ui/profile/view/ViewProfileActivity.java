@@ -14,14 +14,17 @@ import com.example.zwitter.R;
 import com.example.zwitter.data.models.User;
 import com.example.zwitter.ui.profile.edit.EditProfileActivity;
 import com.example.zwitter.utils.Constants;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,6 +33,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
     private Button btnEditFollowProfile;
     private String userId;
+    private boolean isThisFollowButtton;
     private ViewProfileViewModel viewProfileViewModel;
     private TextView followersCount;
     private TextView followingsCount;
@@ -42,6 +46,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
     private User user;
 
     private DatabaseReference database;
+    private DatabaseReference mDatabaseReference;
     private ValueEventListener listener;
 
     @Override
@@ -83,16 +88,9 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
+
                 updateUI(user);
             }
-
-            /*
-            dataSnapshot.child("profileDp").getValue().toString(),
-                        dataSnapshot.child("userName").getValue().toString(),
-                        dataSnapshot.child("noOfFollower").getValue().toString(),
-                        dataSnapshot.child("noOfPosts").getValue().toString(),
-                        dataSnapshot.child("noOfFollowing").getValue().toString()
-             */
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -105,12 +103,16 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
     protected void onStart() {
         super.onStart();
         init();
+
+
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         database.removeEventListener(listener);
+
     }
 
     private void checkIfFollowOrEdit() {
@@ -124,8 +126,10 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
                 userId = data.getString(Constants.INTENT_TAG);
                 if (userId.equals(viewProfileViewModel.getUserId())) {
                     btnEditFollowProfile.setText(getString(R.string.label_edit_profile));
+                    isThisFollowButtton = false;
                 } else {
                     // Todo check if already following or not
+                    isThisFollowButtton = true;
                     btnEditFollowProfile.setText(getString(R.string.label_follow));
                 }
             }
@@ -139,10 +143,18 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        CharSequence textWritten = btnEditFollowProfile.getText();
         switch (v.getId()) {
-            case R.id.followOrEditButton : if (btnEditFollowProfile.getText().equals(getString(R.string.label_edit_profile))) {
+            case R.id.followOrEditButton : if (textWritten.equals(getString(R.string.label_edit_profile))) {
                 startEditProfile();
+            } else if (textWritten.equals(getString(R.string.label_follow))) {
+
+                btnEditFollowProfile.setText(getString(R.string.label_following));
+                viewProfileViewModel.doFollowUpdatesinDb(user.getUserId());
+            } else {
+                //Todo implement behaviour when already following, opposite behaviour of following
             }
+            break;
         }
     }
 
@@ -163,4 +175,33 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         Picasso.get().load(user.getProfileDp())
                 .into(userDp);
     }
+
+    /**
+     * According to firebase rules, there will be callback only if given path exists
+     * Hence, query checks /followingList/myId/otherUserid
+     * if callback occurs, it means that It's in my following list, hence update follow button text to "Following"
+     */
+//    void addListenerToFollowButton() {
+////        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+////        Query query = mDatabaseReference.child("followingList").child(viewProfileViewModel.getUserId())
+////                .child(user.getUserId());
+////        if (isThisFollowButtton) {
+////            query.addListenerForSingleValueEvent(new ValueEventListener() {
+////                @Override
+////                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+////                    btnEditFollowProfile.setText(getString(R.string.label_following));
+////                }
+////
+////                @Override
+////                public void onCancelled(@NonNull DatabaseError databaseError) {
+////
+////                }
+////            });
+////        }
+//
+//        if(isThisFollowButtton) {
+//            viewProfileViewModel.doFollowUpdatesinDb(user.getUserId());
+//        }
+//
+//    }
 }

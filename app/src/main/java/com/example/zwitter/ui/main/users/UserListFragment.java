@@ -65,8 +65,8 @@ public class UserListFragment extends Fragment {
 
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(query, User.class)
-                .build();
+                        .setQuery(query, User.class)
+                        .build();
 
 
         userListAdapter = new FirebaseRecyclerAdapter<User, UserListViewHolder>(options) {
