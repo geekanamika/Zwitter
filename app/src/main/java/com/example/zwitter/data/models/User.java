@@ -2,17 +2,6 @@ package com.example.zwitter.data.models;
 
 import com.example.zwitter.utils.Constants;
 
-/**
- * Json structure:
- * "user-id": {
- *       "name": "",
- *       "no_of_posts": 0,
- *       "no_of_followers": 0,
- *       "no_of_following": 0,
- *       "bio": "",
- *       "profileDp: ""
- *     },
- */
 public class User {
 
     private String noOfPosts;

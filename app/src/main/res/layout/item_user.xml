@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/user_list_avatar"
+        android:layout_width="@dimen/margin_48dp"
+        android:layout_height="@dimen/margin_48dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_marginEnd="@dimen/margin_12dp"
+        android:layout_marginStart="@dimen/margin_12dp"
+        tools:src="@tools:sample/avatars"
+        app:riv_corner_radius="@dimen/margin_24dp"
+        app:riv_oval="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/list_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/full_names"
+            android:textColor="@color/draw_head"
+            android:textStyle="bold"
+            android:layout_margin="2.5dp"
+            android:textSize="@dimen/txt_16sp"/>
+
+        <TextView
+            android:id="@+id/user_list_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:layout_marginStart="@dimen/margin_2dp"
+            android:textColor="@color/color_secondary_text"
+            tools:text="@tools:sample/lorem"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:textSize="@dimen/txt_16sp"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

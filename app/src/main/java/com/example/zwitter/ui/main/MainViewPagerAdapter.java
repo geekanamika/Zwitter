@@ -2,6 +2,7 @@ package com.example.zwitter.ui.main;
 
 import com.example.zwitter.ui.main.feed.FeedFragment;
 import com.example.zwitter.ui.main.messages.MessageListFragment;
+import com.example.zwitter.ui.main.users.UserListFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
-    public MainViewPagerAdapter(FragmentManager fm) {
+    MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -17,11 +18,9 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0 :
-                FeedFragment fragment = FeedFragment.newInstance();
-                return fragment;
+                return FeedFragment.newInstance();
             case 1 :
-                MessageListFragment listFragment = MessageListFragment.newInstance();
-                return listFragment;
+                return new UserListFragment();
             default: return null;
         }
     }

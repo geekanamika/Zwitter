@@ -6,15 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Post {
-    /*
-    {
-      "post_message": "hey this is test message",
-      "date": 0,
-      "user_id": "",
-      "no_of_comments" : 0,
-      "no_of_likes" : 0
-    }
-     */
     private String postId;
     private String profileDp;
     private String postMessage;

@@ -9,13 +9,18 @@
 
     <include layout="@layout/header_profile"/>
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
+        android:id="@+id/user_feed_container"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/list"
-        tools:listitem="@layout/item_tweet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!---->
+        <!--android:id="@+id/list"-->
+        <!--tools:listitem="@layout/item_tweet"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

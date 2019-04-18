@@ -11,11 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zwitter.R;
-import com.example.zwitter.data.AppDataManger;
 import com.example.zwitter.data.models.User;
 import com.example.zwitter.ui.profile.edit.EditProfileActivity;
 import com.example.zwitter.utils.Constants;
-import com.example.zwitter.utils.InjectorUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,6 +37,8 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
     private TextView userName;
     private ImageView userDp;
 
+
+
     private User user;
 
     DatabaseReference database;
@@ -48,7 +49,6 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        AppDataManger dataManger = InjectorUtils.provideRepository();
         viewProfileViewModel = ViewModelProviders.of(this).get(ViewProfileViewModel.class);
 
         followersCount = findViewById(R.id.followersCounterTextView);
@@ -61,7 +61,19 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         btnEditFollowProfile.setOnClickListener(this);
         checkIfFollowOrEdit();
 
-        
+        attachFeedFragment();
+
+    }
+
+    private void attachFeedFragment() {
+        UserFeedFragment fragment = new UserFeedFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.FRAGMENT_BUNDLE_TAG, userId);
+        // set Arguments
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.user_feed_container, fragment, "adding");
+        transaction.commit();
     }
 
     private void init() {

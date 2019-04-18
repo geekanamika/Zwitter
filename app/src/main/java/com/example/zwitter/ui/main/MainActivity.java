@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int[] tabIcons = {
                 R.drawable.ic_action_home_disable,
-                R.drawable.ic_action_message_disable
+                R.drawable.ic_action_profile
         };
         mainTabLayout.getTabAt(0).setIcon(tabIcons[0]);
         mainTabLayout.getTabAt(1).setIcon(tabIcons[1]);

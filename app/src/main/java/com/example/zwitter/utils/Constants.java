@@ -8,4 +8,5 @@ public class Constants {
     public static final String DEFAULT_BIO = "Hey there! I'm using Zwitter";
     public static final String INTENT_NAME_TAG = "INTENT_NAME_TAG";
     public static final String INTENT_BIO_TAG = "INTENT_BIO_TAG";
+    public static final String FRAGMENT_BUNDLE_TAG = "FRAGMENT_BUNDLE_TAG";
 }
