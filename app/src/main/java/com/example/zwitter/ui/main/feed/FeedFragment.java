@@ -75,7 +75,9 @@ public class FeedFragment extends Fragment {
     private void fetch() {
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("posts");
+                .child("posts")
+                .orderByChild("time")
+                ;
 
         FirebaseRecyclerOptions<Post> options =
                 new FirebaseRecyclerOptions.Builder<Post>()

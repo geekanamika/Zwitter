@@ -83,8 +83,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chatRecyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setReverseLayout(true);
-//        layoutManager.setStackFromEnd(true);
         chatRecyclerView.setLayoutManager(layoutManager);
         fetch();
         chatRecyclerView.setAdapter(chatListAdapter);

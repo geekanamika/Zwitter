@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         signInButton.setOnClickListener(this);
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         mFirebaseAuth = FirebaseAuth.getInstance();
+        // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -115,12 +116,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(MY_TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
+
                         if (!task.isSuccessful()) {
                             Log.w(MY_TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            saveUserDetailsAndStartActivity();
+                            boolean isNewuser = task.getResult().getAdditionalUserInfo().isNewUser();
+                            saveUserDetailsAndStartActivity(isNewuser);
                         }
                     }
                 });
@@ -130,12 +133,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
      * Initialise user-data in realtime db
      * starts home screen
      */
-    private void saveUserDetailsAndStartActivity() {
+    private void saveUserDetailsAndStartActivity(boolean isNewUser) {
 
-        if (!loginViewModel.logInSaveDatabase()) {
-            Toast.makeText(this, getString(R.string.error_message),Toast.LENGTH_SHORT).show();
-            return;
+        if (isNewUser) {
+            if (!loginViewModel.logInSaveDatabase()) {
+                Toast.makeText(this, getString(R.string.error_message),Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
+
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
