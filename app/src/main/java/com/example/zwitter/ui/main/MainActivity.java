@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AppDataManger dataManger;
     private TabLayout mainTabLayout;
     private ViewPager mainViewPager;
-    private FloatingActionButton zweetFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpViewPager();
     }
 
+    /**
+     * Create adapter & set it to viewpager & tabLayout
+     */
     private void setUpViewPager() {
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
 
@@ -67,13 +69,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainTabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 
+    /**
+     * instantiate variables
+     */
     private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mainTabLayout = findViewById(R.id.main_tabs);
         mainViewPager = findViewById(R.id.main_view_pager);
-        zweetFab = findViewById(R.id.fab_zweet);
+        FloatingActionButton zweetFab = findViewById(R.id.fab_zweet);
         zweetFab.setOnClickListener(this);
     }
 
@@ -94,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
+    /**
+     * Sign out from firebase & configure & sign out from Google & start log-in screen
+     */
     private void logOut() {
         // Firebase sign out
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -115,15 +123,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+    /**
+     * start log-in screen once logged out
+     */
     private void updateUI() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
+    /**
+     * View user's profile in ViewProfileActivity
+     */
     private void startViewProfile() {
         Intent intent = new Intent(this, ViewProfileActivity.class);
-        intent.putExtra(Constants.INTENT_TAG, dataManger.getUserEmail());
+        intent.putExtra(Constants.INTENT_TAG, dataManger.getUserId());
         startActivity(intent);
     }
 
@@ -134,8 +148,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * start post activity, clear tasks
+     */
     private void startPostActivity() {
         Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra(Constants.INTENT_TAG, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

@@ -21,7 +21,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
         <style name="TextAppearance.Title" parent="@android:style/TextAppearance">
-            <item name="android:textSize">@dimen/txt_18sp</item>
+            <item name="android:textSize">@dimen/txt_24sp</item>
             <item name="android:textColor">@color/primary_text_color</item>
         </style>
 

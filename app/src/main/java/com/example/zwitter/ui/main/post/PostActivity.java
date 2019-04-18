@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.zwitter.R;
 import com.example.zwitter.ui.main.MainActivity;
+import com.example.zwitter.utils.Constants;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -22,9 +24,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText postMessage;
     private Button zweetButton;
-    private Button cancelButton;
     private PostViewModel postViewModel;
-    private RoundedImageView userImage;
+    private Boolean originalOrReply = true;
+    private String postId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,37 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         setTextListener();
     }
 
+    /**
+     * checks how post activity was started
+     */
+    private void checkIfOriginOrReply () {
+        Intent intent = getIntent();
+        if (intent == null) {
+            closeOnError();
+        }
+        if (intent != null) {
+            Bundle data = intent.getExtras();
+            if (data != null) {
+                originalOrReply = data.getBoolean(Constants.INTENT_TAG);
+                if(!originalOrReply)
+                    postId = data.getString(Constants.POST_ID_TAG);
+                Log.d(Constants.MY_TAG , postId + originalOrReply);
+            }
+        }
+    }
+
+    private void closeOnError() {
+        finish();
+        Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
+    }
+
     private void init() {
-        userImage = findViewById(R.id.user_image);
+        checkIfOriginOrReply();
+
+        RoundedImageView userImage = findViewById(R.id.user_image);
         postMessage = findViewById(R.id.zweet_message);
         zweetButton = findViewById(R.id.action_post_message);
-        cancelButton = findViewById(R.id.action_cancel_post);
+        Button cancelButton = findViewById(R.id.action_cancel_post);
         zweetButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
@@ -50,6 +78,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                 .into(userImage);
     }
 
+    /**
+     * ensures that message of length 0 is not posted, post button is disabled
+     */
     private void setTextListener() {
         postMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,7 +134,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         }
         String message = postMessage.getText().toString();
         Toast.makeText(this, getString(R.string.toast_posting), Toast.LENGTH_SHORT).show();
-        postViewModel.originalPostZweet(message);
+        if(originalOrReply)
+            postViewModel.originalPostZweet(message);
+        else
+            postViewModel.postReplyToPostId(postId , message);
 
         startMainActivity();
 

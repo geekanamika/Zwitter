@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.zwitter.R;
-import com.example.zwitter.data.models.User;
 import com.example.zwitter.ui.main.MainActivity;
-import com.example.zwitter.utils.Constants;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,8 +21,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,10 +45,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        init();
+
+    }
+
+    /**
+     * instantiate variables
+     */
+    private void init() {
         Button signInButton = findViewById(R.id.btn_login);
 
         signInButton.setOnClickListener(this);
-
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         mFirebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -63,20 +66,26 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .enableAutoManage(this /* FragmentActivity */, this )
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
     }
 
-    public void logIn() {
+    /**
+     * called on login button click to start google sign in
+     */
+    private void logIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
+    /*
+     checks if result return from launching intent from GoogleSignInApi.getSignInIntent(...);
+     if sign-in successful, authenticate with firebase
+     else Provide error toast
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
@@ -85,12 +94,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign-In failed
-                Log.e(MY_TAG, "Google Sign-In failed.");
+                Toast.makeText(this, "Sign-In failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
 
+    /**
+     * @param acct : account received once sign-in is successful
+     * add listener to activity to start home-screen if task is successful
+     *             else provide error toast
+     */
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 
@@ -112,6 +126,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
+    /**
+     * Initialise user-data in realtime db
+     * starts home screen
+     */
     private void saveUserDetailsAndStartActivity() {
 
         if (!loginViewModel.logInSaveDatabase()) {
@@ -122,12 +140,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         finish();
     }
 
-
-
+    /**
+     * An unresolvable error has occurred and Google APIs will not be available
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
         Log.d(MY_TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }

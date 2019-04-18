@@ -1,52 +1,88 @@
 package com.example.zwitter.data.models;
 
-import java.util.ArrayList;
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Post {
     /*
-    "post_id": {
-      "replies": ["post_id", "post_id", "post_id"],
+    {
       "post_message": "hey this is test message",
       "date": 0,
       "user_id": "",
-      "original_or_reply": true,
-      "comments": ["post_id", "post_id", "post_id"],
-      "likes": [
-        {
-          "uid": "8tyerygwie",
-          "time": "9am"
-        },
-        {
-          "uid": "8tyerygwie",
-          "time": "9am"
-        }
-      ]
-    },
+      "no_of_comments" : 0,
+      "no_of_likes" : 0
+    }
      */
-
+    private String postId;
+    private String profileDp;
     private String postMessage;
+    private String postAuthorId;
     private long time;
-    private String userId;
+    private String userName;
     private boolean originalOrReply;
-    private long noOfLikes;
-    private long noOfComments;
-    private ArrayList<String> likesList;
-    private ArrayList<String> commentsList;
-    private ArrayList<String> replyList;
+    private String noOfLikes;
+    private String noOfComments;
+    public Map<String, Boolean> stars = new HashMap<>();
 
-    public Post(String postMessage, long time,
-                String userId, boolean originalOrReply) {
-        this.postMessage = postMessage;
-        this.time = time;
-        this.userId = userId;
-        this.originalOrReply = originalOrReply;
-        this.noOfLikes = 0;
-        this.noOfComments = 0;
-        this.likesList = new ArrayList<>();
-        this.commentsList = new ArrayList<>();
-        this.replyList = new ArrayList<>();
+    // for firebase
+    public Post() {
+
     }
 
+    public Post(String postAuthorId , String postId, String dp, String postMessage, long time,
+                String userName, boolean originalOrReply) {
+        this.postAuthorId = postAuthorId;
+        this.postId = postId;
+        this.profileDp = dp;
+        this.postMessage = postMessage;
+        this.time = time;
+        this.userName = userName;
+        this.originalOrReply = originalOrReply;
+        this.noOfLikes = "0";
+        this.noOfComments = "0";
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("postAuthorId" , postAuthorId);
+        result.put("postId", postId);
+        result.put("userName", userName);
+        result.put("profileDp", profileDp);
+        result.put("postMessage", postMessage);
+        result.put("time", time);
+        result.put("noOfLikes", noOfLikes);
+        result.put("noOfComments", noOfComments);
+        result.put("originalOrReply", originalOrReply);
+        result.put("stars", stars);
+        return result;
+    }
+
+    public String getPostAuthorId() {
+        return postAuthorId;
+    }
+
+    public void setPostAuthorId(String postAuthorId) {
+        this.postAuthorId = postAuthorId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public String getProfileDp() {
+        return profileDp;
+    }
+
+    public void setProfileDp(String profileDp) {
+        this.profileDp = profileDp;
+    }
 
     public String getPostMessage() {
         return postMessage;
@@ -64,14 +100,6 @@ public class Post {
         this.time = time;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public boolean isOriginalOrReply() {
         return originalOrReply;
     }
@@ -80,43 +108,28 @@ public class Post {
         this.originalOrReply = originalOrReply;
     }
 
-    public long getNoOfLikes() {
+    public String getNoOfLikes() {
         return noOfLikes;
     }
 
-    public void setNoOfLikes(long noOfLikes) {
+    public void setNoOfLikes(String noOfLikes) {
         this.noOfLikes = noOfLikes;
     }
 
-    public long getNoOfComments() {
+    public String getNoOfComments() {
         return noOfComments;
     }
 
-    public void setNoOfComments(long noOfComments) {
+    public void setNoOfComments(String noOfComments) {
         this.noOfComments = noOfComments;
     }
 
-    public ArrayList<String> getLikesList() {
-        return likesList;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLikesList(ArrayList<String> likesList) {
-        this.likesList = likesList;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public ArrayList<String> getCommentsList() {
-        return commentsList;
-    }
-
-    public void setCommentsList(ArrayList<String> commentsList) {
-        this.commentsList = commentsList;
-    }
-
-    public ArrayList<String> getReplyList() {
-        return replyList;
-    }
-
-    public void setReplyList(ArrayList<String> replyList) {
-        this.replyList = replyList;
-    }
 }

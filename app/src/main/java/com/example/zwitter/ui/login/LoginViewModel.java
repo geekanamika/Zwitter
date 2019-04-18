@@ -11,9 +11,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.lifecycle.ViewModel;
 
-public class LoginViewModel extends ViewModel {
+class LoginViewModel extends ViewModel {
 
-    private AppDataManger dataManger;
+    private final AppDataManger dataManger;
 
     public LoginViewModel() {
         dataManger = InjectorUtils.provideRepository();
@@ -22,7 +22,6 @@ public class LoginViewModel extends ViewModel {
     private String getFullUserName() {
         return dataManger.getProfileName();
     }
-
 
     private String getUserId() {
         return dataManger.getUserId();
@@ -37,12 +36,15 @@ public class LoginViewModel extends ViewModel {
     }
 
     private User getUser() {
-        //Todo check if user already exists then don't set no of follower... to 0
-        return new User(getUserId(), getFullUserName(), getProfilePicture());
+        return new User(getFullUserName(), getProfilePicture());
     }
 
+    /**
+     * creates a user object & sends data to firebase
+     * @return true if user is signed else false
+     */
     boolean logInSaveDatabase() {
-        DatabaseReference database = null;
+        DatabaseReference database;
 
         if (isSignedIn()) {
             User user = getUser();

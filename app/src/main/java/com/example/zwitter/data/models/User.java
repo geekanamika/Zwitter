@@ -2,30 +2,41 @@ package com.example.zwitter.data.models;
 
 import com.example.zwitter.utils.Constants;
 
-import java.util.ArrayList;
-
+/**
+ * Json structure:
+ * "user-id": {
+ *       "name": "",
+ *       "no_of_posts": 0,
+ *       "no_of_followers": 0,
+ *       "no_of_following": 0,
+ *       "bio": "",
+ *       "profileDp: ""
+ *     },
+ */
 public class User {
 
-    private String userName;
+    private String noOfPosts;
+    private String noOfFollowing;
     private String userBio;
     private String profileDp;
-    private long noOfPosts;
-    private long noOfFollower;
-    private long noOfFollowing;
-    private ArrayList<String> postIds;
-    private ArrayList<String> followerIds;
-    private ArrayList<String> followingIds;
+    private String userName;
+    private String noOfFollower;
 
-    public User(String userId, String userName, String profileDp) {
+    /*
+        constructor used while sign up
+     */
+    public User(String userName, String profileDp) {
         this.userName = userName;
         this.profileDp = profileDp;
         this.userBio = Constants.DEFAULT_BIO;
-        this.noOfPosts = 0;
-        this.noOfFollower = 0;
-        this.noOfFollowing = 0;
-        this.postIds = new ArrayList<>();
-        this.followerIds = new ArrayList<>();
-        this.followingIds = new ArrayList<>();
+        this.noOfPosts = "0";
+        this.noOfFollower = "0";
+        this.noOfFollowing = "0";
+    }
+
+    // for firebase
+    public User() {
+
     }
 
     public String getUserName() {
@@ -52,51 +63,27 @@ public class User {
         this.profileDp = profileDp;
     }
 
-    public long getNoOfPosts() {
+    public String getNoOfPosts() {
         return noOfPosts;
     }
 
-    public void setNoOfPosts(long noOfPosts) {
+    public void setNoOfPosts(String noOfPosts) {
         this.noOfPosts = noOfPosts;
     }
 
-    public long getNoOfFollower() {
+    public String getNoOfFollower() {
         return noOfFollower;
     }
 
-    public void setNoOfFollower(long noOfFollower) {
+    public void setNoOfFollower(String noOfFollower) {
         this.noOfFollower = noOfFollower;
     }
 
-    public long getNoOfFollowing() {
+    public String getNoOfFollowing() {
         return noOfFollowing;
     }
 
-    public void setNoOfFollowing(long noOfFollowing) {
+    public void setNoOfFollowing(String noOfFollowing) {
         this.noOfFollowing = noOfFollowing;
-    }
-
-    public ArrayList<String> getPostIds() {
-        return postIds;
-    }
-
-    public void setPostIds(ArrayList<String> postIds) {
-        this.postIds = postIds;
-    }
-
-    public ArrayList<String> getFollowerIds() {
-        return followerIds;
-    }
-
-    public void setFollowerIds(ArrayList<String> followerIds) {
-        this.followerIds = followerIds;
-    }
-
-    public ArrayList<String> getFollowingIds() {
-        return followingIds;
-    }
-
-    public void setFollowingIds(ArrayList<String> followingIds) {
-        this.followingIds = followingIds;
     }
 }

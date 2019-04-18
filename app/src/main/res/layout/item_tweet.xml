@@ -5,10 +5,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:showIn="@layout/content_home">
+    tools:showIn="@layout/fragment_feed">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/profImg"
+        android:id="@+id/edit_avatar"
         android:layout_width="@dimen/margin_48dp"
         android:layout_height="@dimen/margin_48dp"
         android:layout_marginTop="@dimen/margin_12dp"
@@ -30,7 +30,7 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/tweet_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="@tools:sample/full_names"
@@ -48,10 +48,11 @@
                 android:layout_margin="@dimen/margin_2dp"
                 android:textSize="@dimen/txt_16sp"
                 android:textColor="@color/draw_description"
-                android:layout_toEndOf="@id/name"/>
+                android:layout_toEndOf="@id/tweet_name"/>
 
             <TextView
                 android:id="@+id/dotSep"
+                android:gravity="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_dot"
@@ -112,6 +113,7 @@
                 android:gravity="center_vertical">
 
                 <ImageView
+                    android:id="@+id/btn_reply"
                     android:layout_width="@dimen/margin_20dp"
                     android:layout_height="@dimen/margin_28dp"
                     android:src="@drawable/ic_comment"/>
@@ -123,7 +125,7 @@
                     android:textAlignment="center"
                     android:layout_marginStart="@dimen/margin_4dp"
                     android:textColor="@color/draw_description"
-                    android:text="@string/label_sample_reply"/>
+                    tools:text="@string/label_sample_reply"/>
 
             </LinearLayout>
 
@@ -137,6 +139,7 @@
                 android:gravity="end|center_vertical">
 
                 <ImageView
+                    android:id="@+id/ic_like"
                     android:layout_width="@dimen/margin_20dp"
                     android:layout_height="@dimen/margin_28dp"
                     android:src="@drawable/ic_like"/>
