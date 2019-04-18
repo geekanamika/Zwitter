@@ -1,7 +1,6 @@
 package com.example.zwitter.ui.main;
 
 import com.example.zwitter.ui.main.feed.FeedFragment;
-import com.example.zwitter.ui.main.messages.MessageListFragment;
 import com.example.zwitter.ui.main.users.UserListFragment;
 
 import androidx.fragment.app.Fragment;

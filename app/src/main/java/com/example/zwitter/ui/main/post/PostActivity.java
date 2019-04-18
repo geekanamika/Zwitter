@@ -128,7 +128,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
     private void validateMessageAndPost() {
 
-        if (TextUtils.isEmpty(zweetButton.getText())) {
+        if (TextUtils.isEmpty(postMessage.getText())) {
             Toast.makeText(this, "Please add message!", Toast.LENGTH_SHORT).show();
             return;
         }

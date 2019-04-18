@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.zwitter.R;
 import com.example.zwitter.data.models.Post;
 import com.example.zwitter.data.models.User;
+import com.example.zwitter.ui.chat.ChatActivity;
 import com.example.zwitter.ui.main.post.PostActivity;
 import com.example.zwitter.ui.profile.view.ViewProfileActivity;
 import com.example.zwitter.utils.Constants;
@@ -36,15 +37,6 @@ public class UserListFragment extends Fragment {
 
     public UserListFragment() {
         // Required empty public constructor
-    }
-
-    public static UserListFragment newInstance() {
-        return new UserListFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -92,11 +84,21 @@ public class UserListFragment extends Fragment {
                 userListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Todo open message to chat
-                        Log.d(Constants.MY_TAG, "name: " + userModel.getUserName());
+
+                        /**
+                         * add receiver id & start chat activity
+                         */
+                        Intent intent = new Intent(UserListFragment.this.getActivity(), ChatActivity.class);
+                        intent.putExtra(Constants.USER_ID_TAG, userModel.getUserId());
+                        intent.putExtra(Constants.USER_DP_TAG, userModel.getProfileDp());
+                        intent.putExtra(Constants.INTENT_NAME_TAG, userModel.getUserName());
+                        startActivity(intent);
                     }
                 });
 
+                /**
+                 * set values on item_user fields
+                 */
                 userListViewHolder.userListFullName.setText(userModel.getUserName());
                 userListViewHolder.userListBio.setText(userModel.getUserBio());
                 Picasso.get().load(userModel.getProfileDp())

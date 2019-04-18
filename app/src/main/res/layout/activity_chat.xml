@@ -1,51 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/padding_16dp"
-    android:paddingTop="@dimen/padding_16dp"
-    android:paddingRight="@dimen/padding_16dp"
-    android:paddingBottom="@dimen/padding_16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messageRecyclerView"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/chat_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout" />
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/chat_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="2dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/chat_receiver_dp"
+                    android:scaleType="centerCrop"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    tools:src="@drawable/avatar"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0.1dp"
+                    app:riv_corner_radius="20dp"
+                    app:riv_oval="true" />
+
+                <TextView
+                    android:id="@+id/chat_receiver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Home"
+                    android:textColor="#282828"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/messageEditText"
-            android:layout_width="0dp"
-            android:inputType="text"
-            android:hint="@string/hint_type_a_message"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/linearLayout"
+            android:paddingLeft="@dimen/padding_16dp"
+            android:paddingTop="@dimen/padding_16dp"
+            android:paddingRight="@dimen/padding_16dp"
+            android:paddingBottom="@dimen/padding_16dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+           android:layout_alignParentBottom="true"
+            android:paddingLeft="@dimen/padding_16dp"
+            android:paddingTop="@dimen/padding_16dp"
+            android:paddingRight="@dimen/padding_16dp"
+            android:paddingBottom="@dimen/padding_16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/sendButton"
-            android:layout_width="@dimen/margin_48dp"
-            android:layout_height="@dimen/margin_48dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/ic_send"
-            android:enabled="false" />
+            <EditText
+                android:id="@+id/messageEditText"
+                android:layout_width="0dp"
+                android:inputType="text"
+                android:hint="@string/hint_type_a_message"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnMessageSend"
+                android:layout_width="@dimen/margin_48dp"
+                android:layout_height="@dimen/margin_48dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/action_send"
+                android:enabled="false" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-</RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--style="?android:attr/progressBarStyleLarge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true" />-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

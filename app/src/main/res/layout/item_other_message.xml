@@ -10,39 +10,15 @@
     android:clipToPadding="false"
     tools:targetApi="o">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/avatar"
-        android:layout_width="@dimen/margin_48dp"
-        android:layout_height="@dimen/margin_48dp"
-        android:layout_marginTop="@dimen/margin_12dp"
-        android:layout_marginEnd="@dimen/margin_12dp"
-        android:layout_marginStart="@dimen/margin_12dp"
-        android:src="@drawable/avatar"
-        app:riv_corner_radius="@dimen/margin_24dp"
-        app:riv_oval="true"/>
-
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_marginStart="@dimen/padding_16dp"
-        android:layout_toEndOf="@+id/avatar"
-        android:layout_alignTop="@+id/avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="4dp"
-        tools:text="Anamika Tripathi"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message_body"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:background="@drawable/bg_other_message"
+        android:background="@drawable/bg_my_text"
         android:paddingVertical="@dimen/margin_12dp"
         android:paddingHorizontal="@dimen/padding_16dp"
         android:elevation="2dp"
         android:textSize="@dimen/txt_16sp"
-        android:text="@string/label_placeholder_chat_message"
+        tools:text="@string/label_placeholder_chat_message"
         tools:targetApi="o" />
 </RelativeLayout>

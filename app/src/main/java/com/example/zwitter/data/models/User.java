@@ -4,6 +4,7 @@ import com.example.zwitter.utils.Constants;
 
 public class User {
 
+    private String userId;
     private String noOfPosts;
     private String noOfFollowing;
     private String userBio;
@@ -14,7 +15,8 @@ public class User {
     /*
         constructor used while sign up
      */
-    public User(String userName, String profileDp) {
+    public User(String userId, String userName, String profileDp) {
+        this.userId = userId;
         this.userName = userName;
         this.profileDp = profileDp;
         this.userBio = Constants.DEFAULT_BIO;
@@ -26,6 +28,14 @@ public class User {
     // for firebase
     public User() {
 
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

@@ -36,7 +36,7 @@ class LoginViewModel extends ViewModel {
     }
 
     private User getUser() {
-        return new User(getFullUserName(), getProfilePicture());
+        return new User(getUserId(), getFullUserName(), getProfilePicture());
     }
 
     /**

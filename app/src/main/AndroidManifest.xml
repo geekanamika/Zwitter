@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.post.PostActivity"></activity>
+        <activity android:name=".ui.chat.ChatActivity"></activity>
+        <activity android:name=".ui.main.post.PostActivity" />
         <activity android:name=".ui.profile.view.ViewProfileActivity" />
         <activity android:name=".ui.profile.edit.EditProfileActivity" />
         <activity android:name=".ui.main.MainActivity">

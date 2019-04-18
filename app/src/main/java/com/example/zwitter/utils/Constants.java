@@ -9,4 +9,6 @@ public class Constants {
     public static final String INTENT_NAME_TAG = "INTENT_NAME_TAG";
     public static final String INTENT_BIO_TAG = "INTENT_BIO_TAG";
     public static final String FRAGMENT_BUNDLE_TAG = "FRAGMENT_BUNDLE_TAG";
+    public static final String USER_ID_TAG = "USER_ID_TAG";
+    public static final String USER_DP_TAG = "USER_DP_TAG";
 }
