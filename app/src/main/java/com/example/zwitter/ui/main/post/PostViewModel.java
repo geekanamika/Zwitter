@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModel;
 
 class PostViewModel extends ViewModel {
     private final AppDataManger dataManger;
-    private DatabaseReference database;
+    private final DatabaseReference database;
 
     public PostViewModel() {
         dataManger = InjectorUtils.provideRepository();

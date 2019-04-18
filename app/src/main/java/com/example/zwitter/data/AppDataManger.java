@@ -6,7 +6,7 @@ import com.example.zwitter.data.network.AppNetworkSource;
 import com.example.zwitter.data.network.SignInManger;
 
 public class AppDataManger implements AppNetworkSource {
-    private SignInManger signInManger;
+    private final SignInManger signInManger;
     // For Singleton instantiation
     private static final Object LOCK = new Object();
     private static AppDataManger sInstance;

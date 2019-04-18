@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 class UserListViewHolder extends RecyclerView.ViewHolder {
-    TextView userListFullName;
-    TextView userListBio;
-    RoundedImageView userListAvatar;
+    final TextView userListFullName;
+    final TextView userListBio;
+    final RoundedImageView userListAvatar;
 
     public UserListViewHolder(@NonNull View itemView) {
         super(itemView);

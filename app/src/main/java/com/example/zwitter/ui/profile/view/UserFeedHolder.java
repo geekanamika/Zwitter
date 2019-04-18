@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 class UserFeedHolder extends RecyclerView.ViewHolder {
-    TextView fullName;
-    TextView timeStamp;
-    TextView content;
-    TextView replyCount;
-    TextView likeCount;
-    RoundedImageView avatar;
-    ImageView likeButton;
-    ImageView replyButton;
+    final TextView fullName;
+    final TextView timeStamp;
+    final TextView content;
+    final TextView replyCount;
+    final TextView likeCount;
+    final RoundedImageView avatar;
+    final ImageView likeButton;
+    final ImageView replyButton;
 
 
     public UserFeedHolder(@NonNull View itemView) {

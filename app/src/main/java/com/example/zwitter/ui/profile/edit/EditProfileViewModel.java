@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 class EditProfileViewModel extends ViewModel {
     private final AppDataManger dataManger;
-    private DatabaseReference database;
+    private final DatabaseReference database;
 
     public EditProfileViewModel() {
         dataManger = InjectorUtils.provideRepository();

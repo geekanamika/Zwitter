@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder {
-    TextView chatMessage;
+    final TextView chatMessage;
     public ChatViewHolder(@NonNull View itemView) {
         super(itemView);
 

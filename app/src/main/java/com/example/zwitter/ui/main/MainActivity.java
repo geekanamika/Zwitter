@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 R.drawable.ic_action_home_disable,
                 R.drawable.ic_action_profile
         };
+
         mainTabLayout.getTabAt(0).setIcon(tabIcons[0]);
         mainTabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }

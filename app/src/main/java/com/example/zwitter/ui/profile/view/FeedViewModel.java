@@ -15,12 +15,11 @@ import com.google.firebase.database.Transaction;
 
 import androidx.lifecycle.ViewModel;
 
-public class FeedViewModel extends ViewModel {
-    private final DatabaseReference mDatabase;
+class FeedViewModel extends ViewModel {
     private final AppDataManger dataManger;
 
     public FeedViewModel() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         dataManger = InjectorUtils.provideRepository();
     }
 

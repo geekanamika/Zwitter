@@ -33,16 +33,13 @@ import com.squareup.picasso.Picasso;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener{
 
-    String receiverId;
-    String receiverName;
-    String receiverDp;
-    TextView messageEditText;
-    TextView tvReceiverName;
-    RoundedImageView imgReceiverAvatar;
-    Button messageSendButton;
-    ChatViewModel chatViewModel;
+    private String receiverId;
+    private String receiverName;
+    private String receiverDp;
+    private TextView messageEditText;
+    private Button messageSendButton;
+    private ChatViewModel chatViewModel;
 
-    RecyclerView chatRecyclerView;
     private FirebaseRecyclerAdapter<Message, ChatViewHolder> chatListAdapter;
 
     public ChatActivity() {
@@ -71,15 +68,15 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.chat_toolbar);
         setSupportActionBar(toolbar);
 
-        tvReceiverName = findViewById(R.id.chat_receiver_name);
-        imgReceiverAvatar = findViewById(R.id.chat_receiver_dp);
+        TextView tvReceiverName = findViewById(R.id.chat_receiver_name);
+        RoundedImageView imgReceiverAvatar = findViewById(R.id.chat_receiver_dp);
         tvReceiverName.setText(receiverName);
         Picasso.get().load(receiverDp).into(imgReceiverAvatar);
 
         setTextListener();
 
         chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        chatRecyclerView = findViewById(R.id.chatRecyclerView);
+        RecyclerView chatRecyclerView = findViewById(R.id.chatRecyclerView);
         chatRecyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

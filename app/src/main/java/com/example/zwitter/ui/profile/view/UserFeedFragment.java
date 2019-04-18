@@ -30,7 +30,6 @@ public class UserFeedFragment extends Fragment {
 
     private RecyclerView feedListView;
     private FeedViewModel feedViewModel;
-    private String userId;
 
     private FirebaseRecyclerAdapter<Post, UserFeedHolder> feedAdapter;
 
@@ -39,15 +38,11 @@ public class UserFeedFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
 
+        String userId;
         if(getArguments()!=null)
             userId = getArguments().getString(Constants.FRAGMENT_BUNDLE_TAG);
 

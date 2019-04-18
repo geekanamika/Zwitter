@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignInManger {
     // Firebase instance variables
-    private FirebaseAuth mFirebaseAuth;
+    private final FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
     // For Singleton instantiation

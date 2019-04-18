@@ -35,10 +35,10 @@ import androidx.lifecycle.ViewModel;
  *   }
  */
 
-public class ChatViewModel extends ViewModel {
+class ChatViewModel extends ViewModel {
 
     private final AppDataManger dataManger;
-    private DatabaseReference database;
+    private final DatabaseReference database;
 
     public ChatViewModel() {
         dataManger = InjectorUtils.provideRepository();

@@ -8,13 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.zwitter.R;
-import com.example.zwitter.data.models.Post;
 import com.example.zwitter.data.models.User;
 import com.example.zwitter.ui.chat.ChatActivity;
-import com.example.zwitter.ui.main.post.PostActivity;
-import com.example.zwitter.ui.profile.view.ViewProfileActivity;
 import com.example.zwitter.utils.Constants;
-import com.example.zwitter.utils.TimeUtil;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +21,6 @@ import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,7 +39,6 @@ public class UserListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userListView = view.findViewById(R.id.feed_list_view);
         userListView.setHasFixedSize(true);
 
@@ -85,7 +79,7 @@ public class UserListFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        /**
+                        /*
                          * add receiver id & start chat activity
                          */
                         Intent intent = new Intent(UserListFragment.this.getActivity(), ChatActivity.class);
@@ -96,7 +90,7 @@ public class UserListFragment extends Fragment {
                     }
                 });
 
-                /**
+                /*
                  * set values on item_user fields
                  */
                 userListViewHolder.userListFullName.setText(userModel.getUserName());

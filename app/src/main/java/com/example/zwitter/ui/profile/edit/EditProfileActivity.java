@@ -92,8 +92,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
 
-        editProfileViewModel.updateUserDetails(etFullUserName.getText().toString(), etBio.getText().toString());
-        Toast.makeText(this, "Profile Updated!", Toast.LENGTH_SHORT).show();
-        finish();
+        if (etFullUserName.getText() != null && etBio.getText() != null) {
+            editProfileViewModel.updateUserDetails(etFullUserName.getText().toString(), etBio.getText().toString());
+            Toast.makeText(this, "Profile Updated!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 }

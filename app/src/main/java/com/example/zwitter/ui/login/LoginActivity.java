@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.zwitter.R;
 import com.example.zwitter.ui.main.MainActivity;
+import com.example.zwitter.utils.Constants;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -92,7 +93,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if (result.isSuccess()) {
                 // Google Sign-In was successful, authenticate with Fire-base
                 GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
+                if (account != null)
+                    firebaseAuthWithGoogle(account);
+                else
+                    Log.e(Constants.MY_TAG, "account is null!");
             } else {
                 // Google Sign-In failed
                 Toast.makeText(this, "Sign-In failed", Toast.LENGTH_SHORT).show();
@@ -122,7 +126,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            boolean isNewuser = task.getResult().getAdditionalUserInfo().isNewUser();
+                            boolean isNewuser = false;
+                            if (task.getResult() != null)
+                                isNewuser = task.getResult().getAdditionalUserInfo().isNewUser();
                             saveUserDetailsAndStartActivity(isNewuser);
                         }
                     }

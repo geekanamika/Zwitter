@@ -41,7 +41,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
     private User user;
 
-    DatabaseReference database;
+    private DatabaseReference database;
     private ValueEventListener listener;
 
     @Override
@@ -154,7 +154,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         startActivity(intent);
     }
 
-    public void updateUI(User user) {
+    private void updateUI(User user) {
         Resources resources = getResources();
         followersCount.setText(resources.getString(R.string.count_followers,user.getNoOfFollower()));
         followingsCount.setText(resources.getString(R.string.count_followings, user.getNoOfFollowing()));
